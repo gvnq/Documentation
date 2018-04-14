@@ -25,6 +25,9 @@
   * [DESIGN PRINCIPLES](#design-principles)
   * [CLARIFICATION](#clarification)
 
+&nbsp;
+
+
 # _What is Soteria?_
 
 ## DEFINITION
