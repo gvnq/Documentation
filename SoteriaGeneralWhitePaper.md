@@ -1,3 +1,14 @@
+# Soteria General White Paper v1
+&nbsp;
+
+
+**April 14, 2018**
+&nbsp;
+
+---
+&nbsp;
+
+
 # _What is Soteria?_
 
 ## DEFINITION
@@ -52,7 +63,7 @@ The blockchain community has realized that Decentralization is not something tha
 
 ## DESIGN PRINCIPLES
 
-Soteria positions itself as the concrete foundation for IOCT - stability and robustness trump everything else. Soteria follows battle-tested engineering best practices and guides its development as such - especially when cryptography is involved. Therefore as a principle Soteria shall not invent its own cryptography protocols (or at least in its early stages of development and deployment) per se, unless it is absolutely necessary (such as in its implementation of smart contracts). Soteria do adopt innovative next generation technologies/protocols - but only reputable ones with sound academic and engineering merits. 
+Soteria positions itself as the concrete foundation for IOCT - stability and robustness trump everything else. Soteria follows battle-tested engineering best practices and guides its development as such - especially when cryptography is involved. Therefore as a principle Soteria shall not invent its own cryptography protocols (or at least in its early stages of development and deployment) per se, unless it is absolutely necessary (such as in its implementation of smart contracts). Soteria does adopt innovative next generation technologies/protocols - but only reputable ones with sound academic and engineering merits. 
 
 
 
