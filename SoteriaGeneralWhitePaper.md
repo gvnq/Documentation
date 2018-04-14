@@ -22,6 +22,8 @@
     + [State Channels for Interactive Micropayments](#state-channels-for-interactive-micropayments)
     + [Side-chain Compatibility](#side-chain-compatibility)
     + [Governance](#governance)
+  * [DESIGN PRINCIPLES](#design-principles)
+  * [CLARIFICATION](#clarification)
 
 # _What is Soteria?_
 
