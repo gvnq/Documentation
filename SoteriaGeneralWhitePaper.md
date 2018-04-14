@@ -8,6 +8,20 @@
 ---
 &nbsp;
 
+<!-- TOC -->
+
+- [What is Soteria?](#what-is-soteria)
+  * [DEFINITION](#definition)
+  * [FEATURES](#features)
+    + [Next Generation POW-based crypto consensus protocols](#next-generation-pow-based-crypto-consensus-protocols)
+    + [Anti-ASIC Memory-based POW Mining Algorithm](#anti-asic-memory-based-pow-mining-algorithm)
+    + [Practical Blockchain Compression and Size Reduction](#practical-blockchain-compression-and-size-reduction)
+    + [Next Generation Privacy-Preserving Transactions](#next-generation-privacy-preserving-transactions)
+    + [UTXO-based Transaction System](#utxo-based-transaction-system)
+    + [UTXO-based Smart Contracts](#utxo-based-smart-contracts)
+    + [State Channels for Interactive Micropayments](#state-channels-for-interactive-micropayments)
+    + [Side-chain Compatibility](#side-chain-compatibility)
+    + [Governance](#governance)
 
 # _What is Soteria?_
 
