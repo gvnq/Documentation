@@ -5,26 +5,27 @@
 **April 14, 2018**
 &nbsp;
 
----
 &nbsp;
 
-<!-- TOC -->
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [What is Soteria?](#what-is-soteria)
-  * [DEFINITION](#definition)
-  * [FEATURES](#features)
-    + [Next Generation POW-based crypto consensus protocols](#next-generation-pow-based-crypto-consensus-protocols)
-    + [Anti-ASIC Memory-based POW Mining Algorithm](#anti-asic-memory-based-pow-mining-algorithm)
-    + [Practical Blockchain Compression and Size Reduction](#practical-blockchain-compression-and-size-reduction)
-    + [Next Generation Privacy-Preserving Transactions](#next-generation-privacy-preserving-transactions)
-    + [UTXO-based Transaction System](#utxo-based-transaction-system)
-    + [UTXO-based Smart Contracts](#utxo-based-smart-contracts)
-    + [State Channels for Interactive Micropayments](#state-channels-for-interactive-micropayments)
-    + [Side-chain Compatibility](#side-chain-compatibility)
-    + [Governance](#governance)
-  * [DESIGN PRINCIPLES](#design-principles)
-  * [CLARIFICATION](#clarification)
+- [Soteria General White Paper v1](#soteria-general-white-paper-v1)
+- [_What is Soteria?_](#what-is-soteria)
+	- [DEFINITION](#definition)
+	- [FEATURES](#features)
+		- [_Next Generation POW-based crypto consensus protocols_](#next-generation-pow-based-crypto-consensus-protocols)
+		- [_Anti-ASIC Memory-based POW Mining Algorithm_](#anti-asic-memory-based-pow-mining-algorithm)
+		- [_Practical Blockchain Compression and Size Reduction_](#practical-blockchain-compression-and-size-reduction)
+		- [_Next Generation Privacy-Preserving Transactions_](#next-generation-privacy-preserving-transactions)
+		- [_UTXO-based Transaction System_](#utxo-based-transaction-system)
+		- [_UTXO-based Smart Contracts_](#utxo-based-smart-contracts)
+		- [_State Channels for Interactive Micropayments_](#state-channels-for-interactive-micropayments)
+		- [_Side-chain Compatibility_](#side-chain-compatibility)
+		- [_Governance_](#governance)
+	- [DESIGN PRINCIPLES](#design-principles)
+	- [CLARIFICATION](#clarification)
 
+<!-- /TOC -->
 &nbsp;
 
 
@@ -34,7 +35,7 @@
 
 Soteria is the code name for the umbrella of protocols that IOCT is built upon. Soteria is the foundation of IOCT. Soteria is not a single computer network protocol or even a set of protocols at that - it is the aggregate of protocols, roadmaps and governance rules that expand to the future - it is a social contract. Soteria is built with cryptographic as well as game theoretic mechanisms to strike a balance among different incentives in a dynamic, heterogenous network comprised of autonomous and intelligent agents.
 
-Nonetheless, Soteria is as much a rigorous computer protocol set as any other such protocol(s). Soteria is self-governed by a flavor of its own  ELEOS smart contracts.
+Nonetheless, Soteria is as much a rigorous computer protocol set as any other such protocol(s). Soteria is self-governed by a flavor of its own ELEOS smart contracts.
 
 
 
@@ -48,7 +49,7 @@ Soteria will implement (in two stages) Full Network Capacity Scalable POW (Proof
 
 ### _Anti-ASIC Memory-based POW Mining Algorithm_
 
-ASIC (Application Specific Integrated Circuits) mining is considered by many as the cancer for POW based crypto-mining - it erodes fairness. Soteria will adopt a computer memory-based POW algorithm called Cuckoo Cycle to mitigate the threat of ASIC Minings. 
+ASIC (Application Specific Integrated Circuits) mining is considered by many as the cancer for POW based crypto-mining - it erodes fairness. Soteria will adopt a computer memory-based POW algorithm called Cuckoo Cycle to mitigate the threat of ASIC Minings.
 
 ### _Practical Blockchain Compression and Size Reduction_
 
@@ -82,7 +83,7 @@ The blockchain community has realized that Decentralization is not something tha
 
 ## DESIGN PRINCIPLES
 
-Soteria positions itself as the concrete foundation for IOCT - stability and robustness trump everything else. Soteria follows battle-tested engineering best practices and guides its development as such - especially when cryptography is involved. Therefore as a principle Soteria shall not invent its own cryptography protocols (or at least in its early stages of development and deployment) per se, unless it is absolutely necessary (such as in its implementation of smart contracts). Soteria does adopt innovative next generation technologies/protocols - but only reputable ones with sound academic and engineering merits. 
+Soteria positions itself as the concrete foundation for IOCT - stability and robustness trump everything else. Soteria follows battle-tested engineering best practices and guides its development as such - especially when cryptography is involved. Therefore as a principle Soteria shall not invent its own cryptography protocols (or at least in its early stages of development and deployment) per se, unless it is absolutely necessary (such as in its implementation of smart contracts). Soteria does adopt innovative next generation technologies/protocols - but only reputable ones with sound academic and engineering merits.
 
 
 
