@@ -54,7 +54,7 @@ Some of the key features of Soteria are:
 
 ### _Next Generation POW-based crypto consensus protocols_
 
-Soteria will implement (in two stages) Full Network Capacity Scalable POW (Proof-of-Work) based consensus protocols - fist Segregated Linear Mining (like Bitcoin-NG), then Recursive Block Voting DAG (SPECTRE) together with Ordered blockDAG (PHANTOM).
+Soteria will implement (in two stages) Full Network Capacity Scalable POW (Proof-of-Work) based consensus protocols - first Segregated Linear Mining (like Bitcoin-NG), then Recursive Block Voting DAG (SPECTRE) together with Ordered blockDAG (PHANTOM).
 
 ### _Anti-ASIC Memory-based POW Mining Algorithm_
 
@@ -119,7 +119,7 @@ These pressing issues are:
 
 * the blockchain scalability challenge
 	- trade-off between throughput and latency
-	- containing blockchain size inflation with high transaction volume
+	- size inflation with high transaction volume
 * true anonimity in a public blockchain
 * trade-off between participation fairness and energy conservation
 * secure, privacy-preserving smart contracts
@@ -229,6 +229,6 @@ _PHANTOM_ works by recognizing blocks mined honestly in the DAG structure and pu
 
 The advantage of the _PHANTOM_ protocol is that it provides a topological ordering - which can be used on smart constracts that require strict ordering.
 
-By pursuing strict ordering _PHANTOM_'s block confirmation time suffers as a result, this is not very optimal compared to _SPECTRE_, which has very high block confirmation time, but no strict ordering.
+By pursuing strict ordering _PHANTOM_'s block confirmation time suffers as a result, this is not very optimal compared to _SPECTRE_, which has very speedy block confirmation time, but no strict ordering.
 
 We plan to implement a combination of _SPECTRE_ and _PHANTOM_ protocols in our second stage of consensus protocol implementation.
