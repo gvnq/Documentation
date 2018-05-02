@@ -2,7 +2,7 @@
 &nbsp;
 
 
-**April 23, 2018**
+**May 2, 2018**
 &nbsp;
 
 &nbsp;
@@ -33,6 +33,10 @@
 			- [_Toward Full Network Capacity Blockchain protocols_](#toward-full-network-capacity-blockchain-protocols)
 				- [_Bitcoin-NG_](#bitcoin-ng)
 				- [_SPECTRE_ and _PHANTOM_](#spectre-and-phantom)
+		- [Side Effect of High throughput - How to Store All That Blockchain?](#side-effect-of-high-throughput-how-to-store-all-that-blockchain)
+			- [_SPV (Simplified Payment Verification)_](#spv-simplified-payment-verification)
+			- [_Pruned Mode_](#pruned-mode)
+			- [_MimbleWimble_](#mimblewimble)
 
 <!-- /TOC -->
 &nbsp;
@@ -42,7 +46,7 @@
 
 ## DEFINITION
 
-Soteria is the code name for the umbrella of protocols that IOCT is built upon. Soteria is the foundation of IOCT. Soteria is not a single computer network protocol or even a set of protocols at that - it is the aggregate of protocols, roadmaps and governance rules that expand to the future - it is a social contract. Soteria is built with cryptographic as well as game theoretic mechanisms to strike a balance among different incentives in a dynamic, heterogenous network comprised of autonomous and intelligent agents.
+Soteria is the code name for the umbrella of protocols to build a scalable, privacy-preserving versatile cryptocurency. Soteria is not a single computer network protocol or even a set of protocols at that - it is the aggregate of protocols, roadmaps and governance rules that expand to the future - it is a social contract. Soteria is built with cryptographic as well as game theoretic mechanisms to strike a balance among different incentives in a dynamic, heterogenous network comprised of autonomous and intelligent agents.
 
 Nonetheless, Soteria is as much a rigorous computer protocol set as any other such protocol(s). Soteria is self-governed by a flavor of its own ELEOS smart contracts.
 
@@ -92,14 +96,14 @@ The blockchain community has realized that Decentralization is not something tha
 
 ## DESIGN PRINCIPLES
 
-Soteria positions itself as the concrete foundation for IOCT - stability and robustness trump everything else. Soteria follows battle-tested engineering best practices and guides its development as such - especially when cryptography is involved. Therefore as a principle Soteria shall not invent its own cryptography protocols (or at least in its early stages of development and deployment) per se, unless it is absolutely necessary (such as in its implementation of smart contracts). Soteria does adopt innovative next generation technologies/protocols - but only reputable ones with sound academic and engineering merits.
+Soteria positions itself as the concrete foundation for a new generation of cryptocurency - stability and robustness trump everything else. Soteria follows battle-tested engineering best practices and guides its development as such - especially when cryptography is involved. Therefore as a principle Soteria shall not invent its own cryptography protocols (or at least in its early stages of development and deployment) per se, unless it is absolutely necessary (such as in its implementation of smart contracts). Soteria does adopt innovative next generation technologies/protocols - but only reputable ones with sound academic and engineering merits.
 
 
 
 ## CLARIFICATION
 
 
-This white paper describes the technology principles and design considerations toward a fully implemented and deployed Soteria software stack. It is the intention of the author to include adequate details of the Soteria technology stack - but be informed that the goal of this white paper is aimed at assisting initial comprehension rather than comprehensive coverage of Soteria - its emphasis is on design principles, not theoretic and implementation details. Please look forward to our subsequent technical white papers for such details. Furthermore, as with any software engineering endeavor, Soteria will also undergo many revisions, iteration cycles and evolution phases to reach utility and maturity. That said, please refer to IOCT’s roadmaps for our aggressive development milestone schedule.
+This white paper describes the technology principles and design considerations toward a fully implemented and deployed Soteria software stack. It is the intention of the author to include adequate details of the Soteria technology stack - but be informed that the goal of this white paper is aimed at assisting initial comprehension rather than comprehensive coverage of Soteria - its emphasis is on design principles, not theoretic and implementation details. Please look forward to our subsequent technical white papers for such details. Furthermore, as with any software engineering endeavor, Soteria will also undergo many revisions, iteration cycles and evolution phases to reach utility and maturity. That said, please refer to the roadmaps for our aggressive development milestone schedule.
 
 
 &nbsp;
@@ -119,7 +123,7 @@ These pressing issues are:
 
 * the blockchain scalability challenge
 	- trade-off between throughput and latency
-	- size inflation with high transaction volume
+	- blockchain size inflation with high transaction volume
 * true anonimity in a public blockchain
 * trade-off between participation fairness and energy conservation
 * secure, privacy-preserving smart contracts
@@ -232,3 +236,45 @@ The advantage of the _PHANTOM_ protocol is that it provides a topological orderi
 By pursuing strict ordering _PHANTOM_'s block confirmation time suffers as a result, this is not very optimal compared to _SPECTRE_, which has very speedy block confirmation time, but no strict ordering.
 
 We plan to implement a combination of _SPECTRE_ and _PHANTOM_ protocols in our second stage of consensus protocol implementation.
+
+### Side Effect of High throughput - How to Store All That Blockchain?
+
+The purpose of a blockchain scalability solution is to vastly increase the throughput of cryptocurency transactions while maintain the security model of the Nakamoto Blockchain that the cryptocurency is based upon. For example, currently the Bitcoin blockchain grows by adding 144 blocks a day (because Bitcoin's 10 minute block creation interval produces 6 blocks every hour - so 144 blocks every 24 hours) - with a block size of 1MB, that's 144MB per day - and about 80 GB a year. At the time of this writing (late April 2018), the Bitcoin blockchain size is approximately 156 GB for almost 10 years of existence (It took quite some time for Bitcoin to reach the 1MB per block size limit) - A comtemporary home computer could accomodate the whole Bitcoin blockchain - Although it is still not convenient for simple transaction nodes.
+
+The current Bitcoin processing speed amounts to about 3 transactions per second - a meager processing speed. If we were to increase the Bitcoin processing speed to match that of the VISA's - about 4000 transactions per second on average - we need to increase the Bitcoin throughput by a thousand fold. Suppose we achieve this scalability feat for Bitcoin - we face another challenge - the Bitcoin blockchain size will increase a thousand fold as well - so 144MB daily increase in blockchain size could easily become 144 GB - and tens or even hundreds of terabytes more of hard drive storage space will be needed each year to accomodate the blockchain size growth. This huge growth in storage space for high throughput blockchain makes running a full processing node in the cryptocurency network untennable for anyone who could not afford to run a modern datacenter. This increase in transaction throughput does not only increase storage capacity requirement - it also makes verifying the huge amount of transactions a challenge as well - so more powerful processing units are needed as well to accomodate the situatoin.
+
+There had been ways proposed and implemented to deal with the blockchain storage space problem - with varying degrees of usefulness:
+
+#### _SPV (Simplified Payment Verification)_
+
+In the original Bitocin white paper Satoshi Nakamoto discussed ways to simply transaction processing - he devised a solution for running a simple transaction node - called SPV (Simplified Payment Verification) - this kind of node can verify payments without running a full network node (participating in creating new blocks). Satoshi indicated that SPV is venerable to fabricated invalid blocks when attackers overwhelme the network. In that case the SPV node still need to download the whole blockchain to verify the transactions, just like a full node.
+
+#### _Pruned Mode_
+
+Inn more recent versions of the Bitcoin software a "pruned mode" was introduced - in this "pruned mode" you can choose how much disk storage space is allocated to the Bitcoin node software - as in this mode verified transaction data can be thrown away to save disk space. However this is still full node software - one still needs to download and verify every transaction on the blockchain ever made at first before throwing away verified transaction data.
+
+As we can see that neither _**SPV**_ nor _**Pruned Mode**_ could render the full node obsolete - full nodes are still needed (and in sufficient numbers) to secure the Bitocin/Nakamoto Blockchain.
+
+Is it possible to permanently discard some of the blockchain data to save space? This was considered to be impossible - until someone proposed an exotic and radical method to do just that -
+
+#### _MimbleWimble_
+
+_**MimbleWimble**_ is a Bitcoin-like cryptocurrency primitive that provides much better scaling and privacy properties than Bitcoin but keeps Bitcoin's security model. It provides a unique way of drastically pruning Bitocoin transaction records in the blockchain while at the same time improves privacy - a seemingly impossible task - but we'll see that pruning transaction records is closely related to its ability to provide privacy. Here we shall focus on the pruning part, and leave the discussion of privacy and other topics to later sections (such as scripts and smart contracts).
+
+In Bitcoin, transactions take two forms around UTXO (Unspend Transaction Output): (1) regular transactions that destroys UTXO - so every transaction destroys an old UTXO and creates a new one with a new key; (2) special transactions that do not destroy old UTXO - they are called _**coinbase**_ transactions and are generated as the rewards for miners - this is the way new "coins" are created in Bitcoin. So the Bitcoin blockchain is a ledger book containing all UTXOs ever created (and destroyed) since the _**genesis block**_. In order to verify a transaction one has to verify all transactions all the way back to the _genesis block_ to really make sure there is no excess coins created or coins created by inflation.
+
+In _MimbleWimble_, we don't deal with regular transactions like that in the Bitcoin, instead transactions are constructed as "Confidential Transactions" (CT), which is a technology that allows the encryption of an amount using _Homomorphic Commitments_. Basically as in Bitcoin, a _MimbleWimble_ transaction centers around (1) _Inputs_, (2) _Outputs_, (3) _Kernel_, and (4) _Kernel Signature_ [#Reference#]:
+
+1. _Inputs_ are just references to old _Outputs_.
+
+2. _Outputs_ are CT (Confidential Transaction) _Outputs_, which are _Algebraic Geometric Group Elements_ that correspond to points on _elliptic curves_, which _blinds_ and _commits_ to amounts (which obscure the true amounts for privacy), plus _**range proofs**_ (for verifying amounts within a range without revealing the true amounts, again for privacy).
+
+3. _Kernel_ is the algebraic difference on the _elliptic curve_ between _Inputs_ and _Outputs_. Due to the scheme of _blinds_ and _commits_, the _Kernel_ is actually a _multi-signature key_ for all transacting parties.
+
+4. _Kernel Signature_ is used for a _Kernel_ to sign itself to ensure there is no tampering of the transaction. By signing other blockchain data using the _Kernerl Signature_ we can add functionalities to extend the original _MimbleWimble_ primitive (to be discussed in other sections).
+
+_Kernel_ and _Kernel Signature_ are very important to what we are discussing here - drastically reducing the blockchain data to gain massive scalability improvement. As we mentioned above, _Kernel_ corresponds to the algebraic difference between _Inputs_ and _Outputs_ on the elliptic curve utilizing _Homomorphic Commitments_. It turns out that by treating _Inputs_ and _Outputs_ this way we can actually remove those cancelling out transactions in the blockchain, and only keep the UTXO transactions and _Kernels_, and still be able to verify the transaction history of UTXOs, which are the only part necessary to maintain the integrity of the blockchain. We can even merge transactions across blocks directly, only keeping the UTXO Transactions and _Kernels_. Please be noted that the verificaiotn of the _Kernels_ are a full validation of the blockchain, just as in Bitcoin. But in Bitcoin all transactions are chained and you can't do full verification with a pruned blockchain - while in _MimbleWimble_ you can - because in _MimbleWimble_ the _Kernels_ keep the integrity of all UTXOs of the blockchain.
+
+Therefore we can see that in _MimbleWimble_ the privacy-preserving design of transactions are a first consideration while blockchain pruning is a welcome (but powerful) side effect. Actually to achieve privacy, _MimbleWimble_ added _range proof_ for CT (_Confidential Transactions_), which increases the Bitcoin-like transaction from 250 bytes to 2.5k bytes - a 1000 fold increase in size - consequently a Bitcoin blockchain of 100GB would be reaching 1TB if CT feature is added, like the _MimbleWimble_ Blockchain. However, since by merging transactions we can drop cancelling out transactions and their _range proofs_, by doing this we can achieve a drastic reduction in blockchain size, again by almost 1000 folds (a 1TB blockchain could be pruned to around 16GB, without the _range proof_ data, which if retained, is around 100GB). Furthermore, since the _MimbleWimble_ blockchain could be pruned to only retaining the UTXO transactions the size growth of the blockchain could be controlled in a much manageable way - with horizontal scaling solutions such as the Lightning Network we can even incentivize people to reduce UTXO transactions on the main chain, thus achieving even greater blockchain size scalability.
+
+As we can see, _MimbleWimble_ primitive brought us a highly scalable blockchain togother with strong privacy preserving properties with the same Bitcoin security model. Therefore we will incorporate the _MimbleWimble_ primitives into our blockchain implementation.
