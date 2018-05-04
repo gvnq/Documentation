@@ -2,7 +2,7 @@
 &nbsp;
 
 
-**May 2, 2018**
+**May 3, 2018**
 &nbsp;
 
 &nbsp;
@@ -36,7 +36,10 @@
 		- [Side Effect of High throughput - How to Store All That Blockchain?](#side-effect-of-high-throughput-how-to-store-all-that-blockchain)
 			- [_SPV (Simplified Payment Verification)_](#spv-simplified-payment-verification)
 			- [_Pruned Mode_](#pruned-mode)
-			- [_MimbleWimble_](#mimblewimble)
+			- [_MimbleWimble - Permanently Pruning the Blockchain_](#mimblewimble-permanently-pruning-the-blockchain)
+		- [How to Recover Satoshi's Dream of fairness](#how-to-recover-satoshis-dream-of-fairness)
+			- [_Criteria for Choosing ASIC Resistant cryptopuzzle Algorithms_](#criteria-for-choosing-asic-resistant-cryptopuzzle-algorithms)
+			- [_Memory Latency Based Cryptopuzzle Algorithm - Cuckoo Cycle_](#memory-latency-based-cryptopuzzle-algorithm-cuckoo-cycle)
 
 <!-- /TOC -->
 &nbsp;
@@ -257,7 +260,7 @@ As we can see that neither _**SPV**_ nor _**Pruned Mode**_ could render the full
 
 Is it possible to permanently discard some of the blockchain data to save space? This was considered to be impossible - until someone proposed an exotic and radical method to do just that -
 
-#### _MimbleWimble_
+#### _MimbleWimble - Permanently Pruning the Blockchain_
 
 _**MimbleWimble**_ is a Bitcoin-like cryptocurrency primitive that provides much better scaling and privacy properties than Bitcoin but keeps Bitcoin's security model. It provides a unique way of drastically pruning Bitocoin transaction records in the blockchain while at the same time improves privacy - a seemingly impossible task - but we'll see that pruning transaction records is closely related to its ability to provide privacy. Here we shall focus on the pruning part, and leave the discussion of privacy and other topics to later sections (such as scripts and smart contracts).
 
@@ -278,3 +281,43 @@ _Kernel_ and _Kernel Signature_ are very important to what we are discussing her
 Therefore we can see that in _MimbleWimble_ the privacy-preserving design of transactions are a first consideration while blockchain pruning is a welcome (but powerful) side effect. Actually to achieve privacy, _MimbleWimble_ added _range proof_ for CT (_Confidential Transactions_), which increases the Bitcoin-like transaction from 250 bytes to 2.5k bytes - a 1000 fold increase in size - consequently a Bitcoin blockchain of 100GB would be reaching 1TB if CT feature is added, like the _MimbleWimble_ Blockchain. However, since by merging transactions we can drop cancelling out transactions and their _range proofs_, by doing this we can achieve a drastic reduction in blockchain size, again by almost 1000 folds (a 1TB blockchain could be pruned to around 16GB, without the _range proof_ data, which if retained, is around 100GB). Furthermore, since the _MimbleWimble_ blockchain could be pruned to only retaining the UTXO transactions the size growth of the blockchain could be controlled in a much manageable way - with horizontal scaling solutions such as the Lightning Network we can even incentivize people to reduce UTXO transactions on the main chain, thus achieving even greater blockchain size scalability.
 
 As we can see, _MimbleWimble_ primitive brought us a highly scalable blockchain togother with strong privacy preserving properties with the same Bitcoin security model. Therefore we will incorporate the _MimbleWimble_ primitives into our blockchain implementation.
+
+### How to Recover Satoshi's Dream of fairness
+
+In Satoshi Nakamoto's Bitcoin blockchain design, security is achieved by building cryptopuzzles into blocks - no one can forge or recreate the blockchain without repeating the same amount of work of solving a puzzle - that is the essence of PoW - Proof of Work. Proof of Work amounts to solving cryptopuzzles. Bitcoin's PoW algorithm or cryptopuzzle inherits that of HashCash, an earlier attempt of digital cash before Bitcoin - which is to find a "nounce" - a number - which when fed into a hash function would yield a number smaller than some predefined number - the so called Bitcoin minors all compete to find this "nounce" to claim the next block reward. The predefined number is used by Bitcoin to control the difficulty of mining.
+
+Bitcoin's hash function is from a family called SHA256, which is computation bound with a small memory footprint. It's a relatiely simple hash function and thus susceptible to optimization by special hardware called ASIC (Application Specific Integrated Circuits), which is a computer chip just like CPU but highly optimized to do one thing well - in this case solving SHA256 hash function cryptopuzzle. As of this writing (April 2018), for Bitcoin's current difficulty level (this difficulty level is increasing since more computation resources are entering Bitcoin mining) the comtemporary home or server CPU's hash rate (how many hashes attempted to solved the SHA256 cryptopuzzle per second) is well below 100 hashes/second (h/s), with top of the line CPUs (those sells over 1000 dollars) overclocked over 4G Hz reaching 300 ~ 400 h/s - whereas Bitcoin mining ASICs such as Bitmain's S9 reaching 14 Tera h/s - some 10 million times faster than CPU mining. Nowadays Bitcoin mining is long past practical for average individual miners - it has become a large scale business with mining farms operating hundreds or even thousands of specialized ASIC mining rigs. Not just computation power - these mining operations consumes huge electricity, they often establish their mining equipments near low cost electricity sources, such as hydro-electricity power generator stations. Satoshi's "one CPU one vote" fairness ideal had been shattered, ironically, following Bitcoin's increasing popularity.
+
+Many consider Bitcoin's massive mining energy consumption a waste - but this energy or external entropy is needed to secure Bitcoin's permissionless, decentralized consensus blockchain integrity, we only need to make it more efficient. Also when Bitcoin mining shifted from individuals to big Bitcoin mining pools, fairness suffers. The concentration of ASIC mining power creates instability for the Bitcoin network - we've witenessed a plethora of selfish mining and other destablizing behaviors from big centralized mining pools over recent years (such as manipulating cryptocurrency prices by deliberately rasing and reducing massive mining power among several cryptocurrency mining operations that have same POW mining algorithm - SHA256).
+
+Therefore we need to find a PoW mining algorithm that is resistant to ASIC mining.
+
+Of course over the years many ASIC-resistant PoW mining algorithms have alrady been developed. Such as Scrypt, CryptoNight - for other cryptocurencies such as Litecoin, Monero, etc. They have achieved somewhat limited success. They are all much complicated than SHA256 - combining mixed computation and memory bound operations. But there is a limit in designing these algorithms, too - because PoW results need to be verified by transaction parties - and the ideal cryptopuzzle algorithm should be hard to compute but easy to verify - SHA256 satisfies this requirement - as it can be made really difficult to compute yet always easy or trivial to verify the result. Other algorithms fall in between - some achieved certain level of ASIC-resistance by making optimized ASIC design of their complex algorithms harder, but suffers on the verification end - it's always a trade off. Easy verification is important because the harder the verificaiton process, the harder the ease of use of the cryptocurrency for everyday transactions suffer.
+
+#### _Criteria for Choosing ASIC Resistant cryptopuzzle Algorithms_
+
+Let's examine the Bitcoin's SHA256. To make it simple, we would pick the time frame of mid 2018. We will compare the hash rates of CPU, GPU and ASIC based mining setups with a budget of $3000 for one mining device, under current difficulty levels (mid 2018). As we have found out - a $3000 CPU mining rig in mid-2018 could probably get 300 h/s; a $3000 GPU mining rig could get 30 M(illion) h/s; while a new Bitmain S11 ASIC mining rig (assuming a ~$3000 price tag) would get 30 T(era) h/s. So the hash rate differnces are - CPU : GPU : ASIC - 1 : 100,000 : 100,000,000,000. Of course the estimate is a simplication but good enough to illustrate the situation. This ratio shows how bad the Bitcoin mining situation is for faireness.
+
+The goal of a good ASIC resistant cryptopuzzle algorithm should try its best to reduce the above ratio.
+
+The ultimate ASIC resistant cryptopuzzle algorithm would be able to reduce the above ratio to 1 : 1 : 1 or close (or within one order of magnitude) - which seems untennable - but we do seem to have just the one - Cuckoo Cycle.
+
+#### _Memory Latency Based Cryptopuzzle Algorithm - Cuckoo Cycle_
+
+_**Cuckoo Cycle**_ is a cryptopuzzle algorithm presented by John Tromp in 2015 [#Reference#]. It's the first Graph-theoretic PoW cryptopuzzle system that is asymmetric in that it is non-trival to proof but trivial ro verify. The method involves finding subgraphs in large pseudo-random graphs - this is what the main Proof-of-Work based upon.
+
+We will not delve into the details of _**Cuckoo Cycle**_ here. We only need to know that it has very good _memory bound_ properties as a PoW cryptopuzzle algorithm [#Reference#].
+
+1. A memory footprint that is big enough to NOT fit into one memory chip
+
+2. It hits the memory in a truly random memory access way
+
+3. The computation associated with each memory access is neglectable
+
+4. No feasible way to trade memory for time
+
+Property 1-3 are easy to understand and self-explanatory. Property 4 needs some explaining - unlike HashCash kind of computation bound PoW systems such as SHA256, memory bound PoW algorithms face a potential attack vector: trade off computation time to reduce memory usage - if the computation time for finding the cryptopuzzle solution is not too bad - then memory usage reduction undermines the PoW system. Thus to satisfy property 4, we need to be reasonably confident that no feasible way exists to achieve this trade off between time and memory - for example, attempts to reduce memory usage would result in "unbearable" increase in computation time.
+
+It's been demonstrated that _**Cuckoo Cycle**_ empirically upholds those _memory bound_ properties list above - so we'll adopt _**Cuckoo Cycle**_ as our memory bound PoW system.
+
+<!-- ### Native Anonymity with Confidential Transactions -->
