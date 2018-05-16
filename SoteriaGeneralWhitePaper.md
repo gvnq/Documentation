@@ -1,8 +1,8 @@
-# Soteria General White Paper v1
+# Soteria General White Paper v0.1
 &nbsp;
 
 
-**May 9, 2018**
+**May 16, 2018**
 &nbsp;
 
 &nbsp;
@@ -10,7 +10,7 @@
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [Soteria General White Paper v1](#soteria-general-white-paper-v1)
+- [Soteria General White Paper v0.1](#soteria-general-white-paper-v01)
 - [_What is Soteria?_](#what-is-soteria)
 	- [DEFINITION](#definition)
 	- [FEATURES](#features)
@@ -44,6 +44,7 @@
 		- [The plight of a public ledger - How to maintain anonymity and fungibility?](#the-plight-of-a-public-ledger-how-to-maintain-anonymity-and-fungibility)
 			- [_Confidential Transactions to the Rescue_](#confidential-transactions-to-the-rescue)
 		- [All is Fair in Love and War and Smart Contracts?](#all-is-fair-in-love-and-war-and-smart-contracts)
+			- [_Predicate Extended UTXO-based State Transition Model for Smart Constract_](#predicate-extended-utxo-based-state-transition-model-for-smart-constract)
 
 <!-- /TOC -->
 &nbsp;
@@ -286,6 +287,8 @@ Therefore we can see that in _MimbleWimble_ the privacy-preserving design of tra
 
 As we can see, _MimbleWimble_ primitive brought us a highly scalable blockchain togother with strong privacy preserving properties with the same Bitcoin security model. Therefore we will incorporate the _MimbleWimble_ primitives into our blockchain implementation.
 
+<!-- By controlling UTXO production it is even possible to make the blockchain size growth at 0 -->
+
 ### How to Recover Satoshi's Dream of Fairness
 
 In Satoshi Nakamoto's Bitcoin blockchain design, security is achieved by building cryptopuzzles into blocks - no one can forge or recreate the blockchain without repeating the same amount of work of solving a puzzle - that is the essence of PoW - Proof of Work. Proof of Work amounts to solving cryptopuzzles. Bitcoin's PoW algorithm or cryptopuzzle inherits that of HashCash, an earlier attempt of digital cash before Bitcoin - which is to find a "nounce" - a number - which when fed into a hash function would yield a number smaller than some predefined number - the so called Bitcoin minors all compete to find this "nounce" to claim the next block reward. The predefined number is used by Bitcoin to control the difficulty of mining.
@@ -365,3 +368,19 @@ Soteria's _Smart Contract_ design would focus on the following issues:
 1. Simplified state processing model in accordance to Soteria's block DAG architecture
 2. Privacy-perserving _Smart Contracts_ in accordance with Soteria's _MimbleWimble_ transaction construction model
 3. Alternative to _**Turing Complete**_ _Smart Constract_ language and virtual machine primitives
+
+#### _Predicate Extended UTXO-based State Transition Model for Smart Constract_
+
+<!-- Ethereum: heavy chains light client; Soteria: Light chains heavy client -->
+
+In general a blockchain runs like this:
+
+1. Blockchain is a replicable state machine and transactions update the states.
+2. In each state the blockchain consensus protocol determines if a transaction is valid given some rules.
+3. miners sequence the valid transactions into blocks and get rewards
+
+Blockchain is a replicable state machine since it is replicated by all network full nodes and all the replicated state machines are kept in sync by the blockchain consensus protocol.
+
+And _Smart Contracts_ are the rules that each full node user relies on to determine if transactions are valid (or not).
+
+We can further abstract these rules into a predicate that must evaluate to be true to have the transacton included into a block.
