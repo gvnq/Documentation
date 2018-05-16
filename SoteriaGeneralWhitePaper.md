@@ -2,10 +2,11 @@
 &nbsp;
 
 
-**May 3, 2018**
+**May 9, 2018**
 &nbsp;
 
 &nbsp;
+
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
@@ -37,9 +38,12 @@
 			- [_SPV (Simplified Payment Verification)_](#spv-simplified-payment-verification)
 			- [_Pruned Mode_](#pruned-mode)
 			- [_MimbleWimble - Permanently Pruning the Blockchain_](#mimblewimble-permanently-pruning-the-blockchain)
-		- [How to Recover Satoshi's Dream of fairness](#how-to-recover-satoshis-dream-of-fairness)
+		- [How to Recover Satoshi's Dream of Fairness](#how-to-recover-satoshis-dream-of-fairness)
 			- [_Criteria for Choosing ASIC Resistant cryptopuzzle Algorithms_](#criteria-for-choosing-asic-resistant-cryptopuzzle-algorithms)
 			- [_Memory Latency Based Cryptopuzzle Algorithm - Cuckoo Cycle_](#memory-latency-based-cryptopuzzle-algorithm-cuckoo-cycle)
+		- [The plight of a public ledger - How to maintain anonymity and fungibility?](#the-plight-of-a-public-ledger-how-to-maintain-anonymity-and-fungibility)
+			- [_Confidential Transactions to the Rescue_](#confidential-transactions-to-the-rescue)
+		- [All is Fair in Love and War and Smart Contracts?](#all-is-fair-in-love-and-war-and-smart-contracts)
 
 <!-- /TOC -->
 &nbsp;
@@ -61,7 +65,7 @@ Some of the key features of Soteria are:
 
 ### _Next Generation POW-based crypto consensus protocols_
 
-Soteria will implement (in two stages) Full Network Capacity Scalable POW (Proof-of-Work) based consensus protocols - first Segregated Linear Mining (like Bitcoin-NG), then Recursive Block Voting DAG (SPECTRE) together with Ordered blockDAG (PHANTOM).
+Soteria will implement (in two stages) Full Network Capacity Scalable POW (Proof-of-Work) based consensus protocols - first Segregated Linear Mining (like Bitcoin-NG), then Recursive Block Voting DAG (SPECTRE) together with Ordered block DAG (PHANTOM).
 
 ### _Anti-ASIC Memory-based POW Mining Algorithm_
 
@@ -73,7 +77,7 @@ A scalable blockchain requires the ability to deal with rapid growth in size - e
 
 ### _Next Generation Privacy-Preserving Transactions_
 
-Privacy-preserving transactions are at the core of a truly autonomous digital economy - Recent advancement in this field enables Soteria to integrate strong privacy-preserving transactions into its technology stack: Confidential Transaction protocols such as MimbleWimble, Bulletproof; noninteractive trustless zero-knowledge proof: Bulletproof, zkSPARKS.
+Privacy-preserving transactions are at the core of a truly autonomous digital economy - Recent advancement in this field enables Soteria to integrate strong privacy-preserving transactions into its technology stack: Confidential Transaction protocols such as MimbleWimble; noninteractive trustless zero-knowledge proof: Bulletproof.
 
 ### _UTXO-based Transaction System_
 
@@ -282,7 +286,7 @@ Therefore we can see that in _MimbleWimble_ the privacy-preserving design of tra
 
 As we can see, _MimbleWimble_ primitive brought us a highly scalable blockchain togother with strong privacy preserving properties with the same Bitcoin security model. Therefore we will incorporate the _MimbleWimble_ primitives into our blockchain implementation.
 
-### How to Recover Satoshi's Dream of fairness
+### How to Recover Satoshi's Dream of Fairness
 
 In Satoshi Nakamoto's Bitcoin blockchain design, security is achieved by building cryptopuzzles into blocks - no one can forge or recreate the blockchain without repeating the same amount of work of solving a puzzle - that is the essence of PoW - Proof of Work. Proof of Work amounts to solving cryptopuzzles. Bitcoin's PoW algorithm or cryptopuzzle inherits that of HashCash, an earlier attempt of digital cash before Bitcoin - which is to find a "nounce" - a number - which when fed into a hash function would yield a number smaller than some predefined number - the so called Bitcoin minors all compete to find this "nounce" to claim the next block reward. The predefined number is used by Bitcoin to control the difficulty of mining.
 
@@ -320,4 +324,44 @@ Property 1-3 are easy to understand and self-explanatory. Property 4 needs some 
 
 It's been demonstrated that _**Cuckoo Cycle**_ empirically upholds those _memory bound_ properties list above - so we'll adopt _**Cuckoo Cycle**_ as our memory bound PoW system.
 
-<!-- ### Native Anonymity with Confidential Transactions -->
+### The plight of a public ledger - How to maintain anonymity and fungibility?
+
+Bitcoin's privacy model is said to be pseudo-anonymous, which reveals the public key that signs the transaction but not the participant's identification information - such as IP addresses. Since the blockchain is a permanent public ledger, such measure (public keys as the only identifying informaiton concerning participants) is a necessary protection of privacy - and it is still way ahead of privacy mechanisms of the centralized regime (banking) where participnats must trust a third party to protect their privacy and often times private and sensitive information gets leaked and nothing further could be done to stop the leaking - as in the digital world information is compromised forever once it is revealed.
+
+However, Bitcoin's privacy protection scheme stops short at this pseudo-anonimity - as everything else - the whole transaction history is made public - the very nature of a public ledger! And as it turns out - even this pseudo-anonimity isn't quite the protection participants think it is - there are many ways to match and link the patterns of transactions of suspicious addresses to real world identities and once this thin layer of protection - key addresses - are revealed and gone, Bitcoin is but an open book.
+
+Bitcoin is not only weak in the privacy aspect - but also in the original goal of its existence - digital cash. For a long time in history cash is the main form of money that is both ubiquitous and fungible - meaning every unit of money should be indistinguishable from each other. The fungibility of cash is also a protection mechanism of privacy - cash has no memory. This runs against the nature of Bitcoin or any blockchain based cryptocurency - the blokchain has all the memory. As Bitcoin's addresses can be tracked and their associated transactions matched - it weakens Bitcoin's role as a fungible digital cash. There are already cases that people pay premiums seeking recent coinbase Bitcoins - which are coins just created and thus considered "cleaner".
+
+#### _Confidential Transactions to the Rescue_
+
+Because of these weaknesses of Bitcoin regarding privacy and fungibility people have been trying to find ways to mitigate the situation. Methods such as Greg Maxwell's CoinJoin, which allows users to hide the transaction amount by merging two or more transactions, and Monero, a cryptocurrency with strong privacy protection mechanisms in its design, employs stealth adresses, ring-signatures and ring confidential transactions. As we discussed in previous sections - Greg Maxwell's _**Confidential Transactions**_ and subsequent improvement by _MimbleWimble_ utilize _Homomorphic Commitments_ and _Range Proofs_ to implement a fully anonymous and fungible cryptocurrency design - the result blockchain almost hides everything related to a transaction - transaction parties, transaction amounts, etc - to an observer all you see in the blockchain are just universally random curve points.
+
+The _MimbleWimble secure blockchain design really hits two bird with one stone - as we discussed in an earlier section, cancelled out inputs and outputs could be dropped from the blockchain completely and the blockchain can still be fully validated - this not only reduces the blockchain size but also has implication for privacy - by dropping majority of transactions the blockchain itself achieves a great deal of privacy - since after pruning most of the transaction history is gone (while the blockchain can still be fully validated) and there is no transaction detail to leak from.
+
+With true anonimity and fungibility we would have a strong _**privacy-preserving transaction**_-based blockchain and cryptocurrency.
+
+Usually the priacy-preserving protection of a blockchain stops at transactions. But with the powerful primitives from _MimbleWimble_ we can extend the privacy-preserving protection to smart contracts. We'll discuss this aspect in the next section.
+
+### All is Fair in Love and War and Smart Contracts?
+
+The _Nakamoto Blockchain_ is a public ledger with transactions of amounts - these amounts reflect how people use the blockchain and the associated cryptocurrency. In the beginning cryptocurrency such as Bitcoin aims to be a digital cash system. Cash is simple, powerful and stateless. Yet when Satoshi Nakamoto first built the Bitcoin software he added something not in his famous white paper - scripts. In Bitcoin each transaction output is described by a script - or we can say that each output is predicated on a script. Scripts in Bitcoin provide complex rich functionalities - such as _multi-signature_.
+
+However, Satoshi didn't make Bitcoin scripts an expressive - he even rolled back features - mainly to prevent DDOS attack on these scripts. This is because more expressive and complex scripts would make checking bounds on these scripts impossible - thus a "fat" scripts may deplete computing resources, resulting in cerntain outcomes that might jeopardize the blockchain itself.
+
+These scripts are what has been called _**Smart Contracts**_, which was first brought up by Nick Szabo in the 1990s. In our context _Smart Contracts_ refer to special computer fragments (little programs) carrying cryptographic primitives to produce outputs in a blockchain transaction. In Nick Szabo's vision _Smart Contracts_ can act like a digital form of legal judgement and are described as being able to enforce "Law of Code" in the digital world similar to judicial devices such as a real legal contract in the physical world.
+
+Bitcoin scripts are inherently limited in order to protect the blockchain from Denial of Service attacks. Even so Bitcoin scripts are still quite powerful in implementing many crucial crypto mechanisms such _multi-signature_, _atomic swap_, _payment chennels_, etc.
+
+Efforts have been invested ever since Bitcoin started the _Smart Contract_ era. Ethereum, another major prominent cryptocurrency after Bitcoin, bid itself as the engine to drive ubiquitous _Smart Contracts_, not merely as digital cash, but also digital assets, as well as arbitrary decentralized applications called DApps - in that sense Ethereum calls itself a "World Computer". Ethereum boasts the implementation of a fully decentralized _**Turing Complete**_ language for writing and running _Smart Contracts_, which means it can support advanced computer language features such as conditional branching, recursion and function reentrancy. These features made Ethereum powerful, and dangerous.
+
+The powerful _**Turing Complete**_ language made Ethereum _Smart Contract_ vulnerable to ill-formed _Smart Constract_ implementation. There had been incidents that lost millions of coins by ill-constructed _Smart Contracts_ that power DApps managing large amounts of coins (which worth hundred of millions of US Dollars). It seems that _**Turing Complete**_-ness is a double edged sword - self-inflicted wounds are almost unavoidable. The power of _**Turing Complete**_-ness concentrated on a single blockchain managing values, in the hands of often immature DApp developers, makes Ethereum very sensitive to even simple programming errors. This low programming fault tolerance is a crucial weakness for Ethereum to be a "system" language for developing DApps that manage values.
+
+Ethereum's low throughput (~30 TPS) doesn't help it being the "World Computer" either - it got choked a lot when popular DApps such as those lauching cryptocurrencies based out of Ethereum _Smart Contracts_ (the so called ERC-20 _Smart Contract_) suddenly released and overwhelme the Ethereum network. Other examples include a very popular, first of its kind decentralized blockchain game called _**CryptoKitties**_. Of course this phenomenon is not directly related to the design of Ethereum's _Smart Contract_ engine but it did compounded the symptom.
+
+So what are the features of Soteria that would solve or at least improve on the current generation of _Smart Contract_ design?
+
+Soteria's _Smart Contract_ design would focus on the following issues:
+
+1. Simplified state processing model in accordance to Soteria's block DAG architecture
+2. Privacy-perserving _Smart Contracts_ in accordance with Soteria's _MimbleWimble_ transaction construction model
+3. Alternative to _**Turing Complete**_ _Smart Constract_ language and virtual machine primitives
