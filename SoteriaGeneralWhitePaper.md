@@ -383,4 +383,20 @@ Blockchain is a replicable state machine since it is replicated by all network f
 
 And _Smart Contracts_ are the rules that each full node user relies on to determine if transactions are valid (or not).
 
-We can further abstract these rules into a predicate that must evaluate to be true to have the transacton included into a block.
+We can further abstract these rules into a _**predicate**_ that must evaluate to be true to have the transacton included into a block.
+
+This model describes both Bitcoin and Ethereum - the differences between the two are subtle and are within the transaction itself (beyond transactions are blocks and consensus protocols which are quite similar in structure for both Bitcoin and Ethereum for now):
+
+Bitcoin - Bitcoin has the _**UTXO**_ model: each transaction contains a list of _**UTXOs**_ to represent different states; each _**UTXO**_ unit has an input (received from another output), which is an amount in units of Bitcoins, and an output, which is a sequence of script code that would produce an output in the amount of units of Bitcoins. Transaction changes states by executing the scripts. _**UTXOs**_ can be created and destroyed. The states are limited to amounts of Bitcoins associated with some addresses.
+
+Ethereum - Ethereum has the _**Constracts**_ model: each transaction contains a list of _**Contracts**_ to represent different states; each _**Contracts**_ has an account balance in units of _Ether_ (the cryptocurrency unit for Ethereum) and a sequence of program code which when executed would change the transaction states. New _**Contracts**_ can be created and old destroyed. States in Ethereum transactions do not only concern account balance but arbitrary variables representing values (other than _Ethers_).
+
+Ethereum _**Contracts**_ has the form of a _**Turing Complete**_ program but actually is not - to prevent those programs that never terminate due to intent or bug, Ethereum has implemented a _**Gas**_ sysetm - every _**Contracts**_ is bound by the total _**Gas**_ limit as well as individual _**Gas**_ limit. Therefore every Ethereum _**Contracts**_ will always terminate within a predetermined bound, making it _**Non-Turing Complete**_.
+
+Nonetheless, Ethereum's _**Smart Contract**_ is considered to be very expressive, so much that many think it is too dangerous to handle money and assets. Many lost millions due to simple programming errors and bugs in software libraries.
+
+On the other hand Bitcoin's script system is considered to be quite safe and robust yet limited in expressive power. It can do somethings very straightforwardly and others tricky to implement or too difficult to figure out even by experts.
+
+Let's go back to our simple and general blockchain model in the beginning of this section - that we can abstract the rules in a transaction to a _**predicate**_ which is another saying for "condition" in formal logic parlance. _**Predicates**_ are not as expressive as functions but with some tweak can be easily made so. We can add arbitrary function inputs to transactions to make _**predicates**_ as expressive as functions.
+
+If we define computable functions on natural domain N that are defined by a  Turing machine, lambda calculus  term or general recursion, we can then further define computably enumerable (C.E.) _**predicates**_ on N. Now we have this _**C.E. predicates**_ that are the broadest class of predicates that we can programmatically define [#Citation - Emil Post]. By utilizing _**C.E. predicates**_ we can have _Turing-complete_ equivalent predicates and reducing validating these predicates to simpler predicates with a _**witness**_. a _**witness**_ is also a kind of condition for our special domain _**predicate**_. There are several types of _**witness**_ we can choose for our _**predicate**_, for example, we can have a _Gas-based_ _**witness**_, such as in Ethereum. We can also have a _Trace-based_ _**witness**_, which encodes the sequence of all intermediate states within a transaction. The benefit of a _Trace-based_ _**witeness**_ is that it is very simple and flexible but could have redundancies. So we should design our blockchain languae somewhere in between (_Gas-based_ and _Trace-based_).
